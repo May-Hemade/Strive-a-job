@@ -5,6 +5,7 @@ import JobList from "./JobList"
 
 export default function Home() {
   const [jobs, setJobs] = useState([])
+
   const params = useParams()
 
   useEffect(() => {

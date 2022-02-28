@@ -7,7 +7,7 @@ export default function JobCard({ job }) {
     <div>
       <Card className="mt-4">
         <Card.Body>
-          <Card.Title>{job.title}</Card.Title>
+          <Card.Title to="/job">{job.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {job.category}
           </Card.Subtitle>

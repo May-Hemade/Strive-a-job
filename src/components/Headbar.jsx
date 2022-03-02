@@ -1,6 +1,8 @@
 import React from "react"
 import { Button, Form, FormControl, Nav, Navbar } from "react-bootstrap"
 import { useForm } from "react-hook-form"
+import { Link } from "react-router-dom"
+
 import { useNavigate } from "react-router-dom"
 
 export default function Headbar() {
@@ -15,7 +17,11 @@ export default function Headbar() {
         <Navbar.Brand href="/">Strive-A-Job</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto"></Nav>
+          <Nav className="mr-auto">
+            <Link to="/favorites">
+              <div className="nav-link">Favorites</div>
+            </Link>
+          </Nav>
           <Form onSubmit={handleSubmit(onSubmit)} inline>
             <FormControl
               type="text"

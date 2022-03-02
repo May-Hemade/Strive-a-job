@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Headbar from "./components/Headbar"
 import Home from "./components/Home"
 import Company from "./components/Company"
+import Favorites from "./components/Favorites"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search/:search" element={<Home />} />
         <Route path="/companies/:company" element={<Company />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </BrowserRouter>
   )

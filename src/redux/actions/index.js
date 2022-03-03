@@ -15,14 +15,14 @@ export const removeFromFavoriteAction = (indexToRemove) => ({
   payload: indexToRemove,
 })
 
-export const getJobsAction = () => {
+export const getJobsAction = (search) => {
   console.log("get action jobs")
   return (dispatch) => {
     setTimeout(async () => {
       try {
-        // const searchQuery = search ? `&search=${search}` : ""
+        const searchQuery = search ? `&search=${search}` : ""
         let response = await fetch(
-          "https://strive-jobs-api.herokuapp.com/jobs?limit=20"
+          "https://strive-jobs-api.herokuapp.com/jobs?limit=20" + searchQuery
         )
         if (response.ok) {
           let result = await response.json()

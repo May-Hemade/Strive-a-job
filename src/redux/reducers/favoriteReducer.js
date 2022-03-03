@@ -6,17 +6,16 @@ const favoriteReducer = (state = initialState, action) => {
     case ADD_FAVORITE:
       return {
         ...state,
-
-        favorites: [...state.favorites, action.payload],
+        listing: [...state.listing, action.payload],
       }
 
     case REMOVE_FROM_FAVORITE:
       return {
         ...state,
 
-        favorites: [
-          ...state.favorites.slice(0, action.payload),
-          ...state.favorites.slice(action.payload + 1),
+        listing: [
+          ...state.listing.slice(0, action.payload),
+          ...state.listing.slice(action.payload + 1),
         ],
       }
     default:

@@ -8,8 +8,15 @@ import thunk from "redux-thunk"
 const aComposeFunction = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export const initialState = {
-  favorites: [],
-  jobs: [],
+  favorites: {
+    listing: [],
+  },
+
+  jobs: {
+    listing: [],
+    isError: false,
+    isLoading: true,
+  },
 }
 
 const bigReducer = combineReducers({

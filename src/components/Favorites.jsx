@@ -6,7 +6,7 @@ import { FaTrash } from "react-icons/fa"
 import { Button } from "react-bootstrap"
 
 const mapStateToProps = (state) => ({
-  favorites: state.favorites,
+  favorites: state.favorites.listing,
 })
 
 const mapDispatchToProps = (dispatch) => ({

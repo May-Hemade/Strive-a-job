@@ -1,5 +1,6 @@
-import { Component } from "react"
+import { useEffect } from "react"
 import { connect } from "react-redux"
+import { useParams } from "react-router-dom"
 
 import { getJobsAction } from "../redux/actions"
 
@@ -10,42 +11,23 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getJobs: () => {
+  getJobs: (search) => {
     console.log("in mapDispatchToProps")
-    dispatch(getJobsAction())
+    dispatch(getJobsAction(search))
   },
 })
 
-class Home extends Component {
-  componentDidMount = async () => {
-    console.log("this.props", this.props)
-    this.props.getJobs()
-  }
+const Home = ({ getJobs, jobs }) => {
+  const params = useParams()
 
-  // const loadJobs = async () => {
-  //   try {
-  //     const searchQuery = params.search ? `&search=${params.search}` : ""
+  useEffect(() => {
+    getJobs(params.search)
+  }, [getJobs, params.search])
 
-  //     let resp = await fetch(
-  //       "https://strive-jobs-api.herokuapp.com/jobs?limit=20" + searchQuery
-  //     )
-  //     if (resp.ok) {
-  //       let result = await resp.json()
-  //       setJobs(result.data)
-  //     } else {
-  //       console.log("error")
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  render() {
-    return (
-      <div>
-        <JobList jobs={this.props.jobs}></JobList>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <JobList jobs={jobs}></JobList>
+    </div>
+  )
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

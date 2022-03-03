@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Spinner } from "react-bootstrap"
 import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
 
@@ -7,7 +8,7 @@ import { getJobsAction } from "../redux/actions"
 import JobList from "./JobList"
 
 const mapStateToProps = (state) => ({
-  jobs: state.jobs.listing,
+  jobs: state.jobs,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -26,7 +27,13 @@ const Home = ({ getJobs, jobs }) => {
 
   return (
     <div>
-      <JobList jobs={jobs}></JobList>
+      {jobs.isLoading && (
+        <div className="d-flex justify-content-center m-4">
+          <Spinner variant="primary" animation="border" />
+        </div>
+      )}
+
+      <JobList jobs={jobs.listing}></JobList>
     </div>
   )
 }

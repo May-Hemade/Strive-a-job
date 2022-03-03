@@ -3,7 +3,9 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import { addToFavoriteAction } from "../redux/actions"
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  favorites: state.favorites.listing,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavorite: (favoriteToAdd) => {
@@ -11,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-function JobCard({ job, addToFavorite }) {
+function JobCard({ job, addToFavorite, favorites }) {
   return (
     <div>
       <Card className="mt-4">
@@ -28,6 +30,7 @@ function JobCard({ job, addToFavorite }) {
             <Button
               className="mt-3"
               color="primary"
+              disabled={favorites.includes(job.company_name)}
               onClick={() => {
                 addToFavorite(job.company_name)
               }}

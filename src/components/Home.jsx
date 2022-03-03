@@ -1,38 +1,51 @@
-import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Component } from "react"
+import { connect } from "react-redux"
+
+import { getJobsAction } from "../redux/actions"
 
 import JobList from "./JobList"
 
-export default function Home() {
-  const [jobs, setJobs] = useState([])
+const mapStateToProps = (state) => ({
+  jobs: state.jobs.listing,
+})
 
-  const params = useParams()
+const mapDispatchToProps = (dispatch) => ({
+  getJobs: () => {
+    console.log("in mapDispatchToProps")
+    dispatch(getJobsAction())
+  },
+})
 
-  useEffect(() => {
-    loadJobs()
-  })
-
-  const loadJobs = async () => {
-    try {
-      const searchQuery = params.search ? `&search=${params.search}` : ""
-
-      let resp = await fetch(
-        "https://strive-jobs-api.herokuapp.com/jobs?limit=20" + searchQuery
-      )
-      if (resp.ok) {
-        let result = await resp.json()
-        setJobs(result.data)
-      } else {
-        console.log("error")
-      }
-    } catch (error) {
-      console.log(error)
-    }
+class Home extends Component {
+  componentDidMount = async () => {
+    console.log("this.props", this.props)
+    this.props.getJobs()
   }
 
-  return (
-    <div>
-      <JobList jobs={jobs}></JobList>
-    </div>
-  )
+  // const loadJobs = async () => {
+  //   try {
+  //     const searchQuery = params.search ? `&search=${params.search}` : ""
+
+  //     let resp = await fetch(
+  //       "https://strive-jobs-api.herokuapp.com/jobs?limit=20" + searchQuery
+  //     )
+  //     if (resp.ok) {
+  //       let result = await resp.json()
+  //       setJobs(result.data)
+  //     } else {
+  //       console.log("error")
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  render() {
+    return (
+      <div>
+        <JobList jobs={this.props.jobs}></JobList>
+      </div>
+    )
+  }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

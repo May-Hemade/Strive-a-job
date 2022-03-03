@@ -1,7 +1,7 @@
 import { ADD_FAVORITE, REMOVE_FROM_FAVORITE } from "../actions"
 import { initialState } from "../store"
 
-const mainReducer = (state = initialState, action) => {
+const favoriteReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAVORITE:
       return {
@@ -24,4 +24,4 @@ const mainReducer = (state = initialState, action) => {
   }
 }
 
-export default mainReducer
+export default favoriteReducer

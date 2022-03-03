@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Spinner } from "react-bootstrap"
+import { Alert, Spinner } from "react-bootstrap"
 import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
 
@@ -30,6 +30,12 @@ const Home = ({ getJobs, jobs }) => {
       {jobs.isLoading && (
         <div className="d-flex justify-content-center m-4">
           <Spinner variant="primary" animation="border" />
+        </div>
+      )}
+
+      {jobs.isError && (
+        <div className="d-flex justify-content-center m-4">
+          <Alert variant="danger">Could not load Jobs, try again</Alert>
         </div>
       )}
 

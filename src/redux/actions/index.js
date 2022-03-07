@@ -3,6 +3,7 @@ export const REMOVE_FROM_FAVORITE = "REMOVE_FROM_FAVORITE"
 export const GET_JOBS = "GET_JOBS"
 export const GET_JOBS_ERROR = "GET_JOBS_ERROR"
 export const GET_JOBS_LOADING = "GET_JOBS_LOADING"
+export const SELECT_JOB = "SELECT_JOB"
 
 export const addToFavoriteAction = (addToFavorite) => ({
   type: ADD_FAVORITE,
@@ -58,3 +59,9 @@ export const getJobsAction = (search) => {
     }, 1000)
   }
 }
+
+export const selectJobAction = (jobItem) => ({
+  type: SELECT_JOB,
+
+  payload: jobItem,
+})

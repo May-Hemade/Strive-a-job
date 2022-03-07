@@ -1,7 +1,7 @@
 import { Button, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { addToFavoriteAction } from "../redux/actions"
+import { addToFavoriteAction, selectJobAction } from "../redux/actions"
 
 // const mapStateToProps = (state) => ({
 //   favorites: state.favorites.listing,
@@ -19,7 +19,12 @@ function JobCard({ job }) {
   const dispatch = useDispatch()
   return (
     <div>
-      <Card className="mt-4">
+      <Card
+        className="mt-4"
+        onClick={() => {
+          dispatch(selectJobAction(job))
+        }}
+      >
         <Card.Body>
           <Card.Title>{job.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">

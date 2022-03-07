@@ -1,9 +1,10 @@
 import { useEffect } from "react"
-import { Alert, Spinner } from "react-bootstrap"
+import { Alert, Col, Container, Row, Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
 import { getJobsAction } from "../redux/actions"
+import JobDetail from "./JobDetail"
 
 import JobList from "./JobList"
 
@@ -30,19 +31,27 @@ const Home = () => {
 
   return (
     <div>
-      {jobs.isLoading && (
-        <div className="d-flex justify-content-center m-4">
-          <Spinner variant="primary" animation="border" />
-        </div>
-      )}
+      <Container fluid>
+        <Row>
+          <Col md={3}>
+            {jobs.isLoading && (
+              <div className="d-flex justify-content-center m-4">
+                <Spinner variant="primary" animation="border" />
+              </div>
+            )}
 
-      {jobs.isError && (
-        <div className="d-flex justify-content-center m-4">
-          <Alert variant="danger">Could not load Jobs, try again</Alert>
-        </div>
-      )}
+            {jobs.isError && (
+              <div className="d-flex justify-content-center m-4">
+                <Alert variant="danger">Could not load Jobs, try again</Alert>
+              </div>
+            )}
 
-      <JobList jobs={jobs.listing}></JobList>
+            <JobList jobs={jobs.listing}></JobList>
+          </Col>
+
+          <Col>{jobs.listing.length > 0 && <JobDetail></JobDetail>}</Col>
+        </Row>
+      </Container>
     </div>
   )
 }

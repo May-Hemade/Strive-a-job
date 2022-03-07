@@ -4,7 +4,7 @@ import jobReducer from "../reducers/jobReducer"
 import favoriteReducer from "../reducers/favoriteReducer"
 
 import thunk from "redux-thunk"
-import localStorage from "redux-persist/lib/storage"
+
 import { persistReducer, persistStore } from "redux-persist"
 import { encryptTransform } from "redux-persist-transform-encrypt"
 import sessionStorage from "redux-persist/es/storage/session"
@@ -20,6 +20,7 @@ export const initialState = {
     listing: [],
     isError: false,
     isLoading: true,
+    selectedJob: {},
   },
 }
 

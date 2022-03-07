@@ -1,22 +1,24 @@
 import React from "react"
-import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { removeFromFavoriteAction } from "../redux/actions"
 import { FaTrash } from "react-icons/fa"
 import { Button } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
 
-const mapStateToProps = (state) => ({
-  favorites: state.favorites.listing,
-})
+// const mapStateToProps = (state) => ({
+//   favorites: state.favorites.listing,
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-  removeFromFavorite: (index) => {
-    dispatch(removeFromFavoriteAction(index))
-  },
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   removeFromFavorite: (index) => {
+//     dispatch(removeFromFavoriteAction(index))
+//   },
+// })
 
-function Favorites({ favorites, removeFromFavorite }) {
-  console.log(favorites)
+function Favorites() {
+  const favorites = useSelector((state) => state.favorites.listing)
+
+  const dispatch = useDispatch()
 
   return (
     <ul>
@@ -29,7 +31,7 @@ function Favorites({ favorites, removeFromFavorite }) {
             <Button
               variant="danger"
               className=" ml-5"
-              onClick={() => removeFromFavorite(i)}
+              onClick={() => dispatch(removeFromFavoriteAction(i))}
             >
               <FaTrash />
             </Button>
@@ -40,4 +42,4 @@ function Favorites({ favorites, removeFromFavorite }) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites)
+export default Favorites

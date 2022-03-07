@@ -1,29 +1,32 @@
 import { useEffect } from "react"
 import { Alert, Spinner } from "react-bootstrap"
-import { connect } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
 import { getJobsAction } from "../redux/actions"
 
 import JobList from "./JobList"
 
-const mapStateToProps = (state) => ({
-  jobs: state.jobs,
-})
+// const mapStateToProps = (state) => ({
+//   jobs: state.jobs,
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-  getJobs: (search) => {
-    console.log("in mapDispatchToProps")
-    dispatch(getJobsAction(search))
-  },
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   getJobs: (search) => {
+//     console.log("in mapDispatchToProps")
+//     dispatch(getJobsAction(search))
+//   },
+// })
 
-const Home = ({ getJobs, jobs }) => {
+const Home = () => {
   const params = useParams()
 
+  const jobs = useSelector((state) => state.jobs)
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    getJobs(params.search)
-  }, [getJobs, params.search])
+    dispatch(getJobsAction(params.search))
+  }, [dispatch, params.search])
 
   return (
     <div>
@@ -43,4 +46,4 @@ const Home = ({ getJobs, jobs }) => {
     </div>
   )
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home

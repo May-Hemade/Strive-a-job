@@ -1,19 +1,22 @@
 import { Button, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { connect } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addToFavoriteAction } from "../redux/actions"
 
-const mapStateToProps = (state) => ({
-  favorites: state.favorites.listing,
-})
+// const mapStateToProps = (state) => ({
+//   favorites: state.favorites.listing,
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-  addToFavorite: (favoriteToAdd) => {
-    dispatch(addToFavoriteAction(favoriteToAdd))
-  },
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   addToFavorite: (favoriteToAdd) => {
+//     dispatch(addToFavoriteAction(favoriteToAdd))
+//   },
+// })
 
-function JobCard({ job, addToFavorite, favorites }) {
+function JobCard({ job }) {
+  const favorites = useSelector((state) => state.favorites.listing)
+
+  const dispatch = useDispatch()
   return (
     <div>
       <Card className="mt-4">
@@ -32,7 +35,7 @@ function JobCard({ job, addToFavorite, favorites }) {
               color="primary"
               disabled={favorites.includes(job.company_name)}
               onClick={() => {
-                addToFavorite(job.company_name)
+                dispatch(addToFavoriteAction(job.company_name))
               }}
             >
               Favorite
@@ -48,4 +51,4 @@ function isEmpty(str) {
   return !str || str.length === 0
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(JobCard)
+export default JobCard
